@@ -1,0 +1,16 @@
+#slide1{
+    height: calc(100vh - 250px);
+    background: url('../../../assets/images/5cbeea5928deb.png') center center;
+    background-size: cover;
+    margin-bottom: 30px;
+}
+
+ion-text{
+    color: rgb(27, 27, 27);
+    font-weight: 400;
+}
+
+ion-button{
+    text-decoration: underline;
+    margin-bottom: 30px;
+}

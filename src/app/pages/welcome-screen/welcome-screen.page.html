@@ -1,0 +1,57 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>welcome-screen</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+    <ion-slides pager="true" [options]="slideOpts" align-items-center>
+      <ion-slide>
+        <ion-grid no-padding>
+          <ion-row >
+            <ion-col>
+              <div id="slide1"></div>
+              <!-- <ion-img src='../../../assets/images/5cbeea5928deb.png' height="80%"></ion-img> -->
+            </ion-col>
+          </ion-row>
+          <ion-row margin-bottom>
+            <ion-col size="10" offset="1">
+              <ion-text>
+                 Calculate your Grade Point Average on the go
+              </ion-text>
+            </ion-col>
+            <ion-col >
+              <ion-button color="primary" fill="clear" [routerLink]="['/login']">Skip</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+  
+      </ion-slide>
+
+      <ion-slide>
+        <ion-grid no-padding>
+          <ion-row >
+            <ion-col>
+              <div id="slide1"></div>
+            </ion-col>
+          </ion-row>
+          <ion-row margin-bottom>
+            <ion-col size="10" offset="1">
+              <ion-text>
+                  Calculate your Grade Point Average on the go
+              </ion-text>
+            </ion-col>
+            <ion-col >
+              <ion-button color="primary" fill="clear" [routerLink]="[ '/login']"> Skip</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+      <!-- <ion-slide>
+        <h1>Slide 2</h1>
+      </ion-slide>
+      <ion-slide>
+        <h1>Slide 3</h1>
+      </ion-slide> -->
+    </ion-slides>
+</ion-content>

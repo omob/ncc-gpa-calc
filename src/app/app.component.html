@@ -1,3 +1,47 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start">
+    <!-- <ion-header>
+        <ion-toolbar>
+          <ion-title>
+            PairBnB
+          </ion-title>
+        </ion-toolbar>
+    </ion-header> -->
+    <ion-content id="sidebarContent">
+      <div id="banner">
+
+      </div>
+      <ion-list>
+        <ion-menu-toggle>
+            <ion-item [routerLink]="['/home']" lines="none">
+              <ion-icon name="home" slot="start"></ion-icon>
+              <ion-label>Home</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+    
+          <ion-menu-toggle>
+            <ion-item [routerLink]="['/home/profile']" lines="none">
+              <ion-icon name="person" slot="start"></ion-icon>
+              <ion-label>Profile</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+    
+          <ion-menu-toggle>
+            <ion-item [routerLink]="['/home/histories']" lines="none">
+              <ion-icon name="paper" slot="start"></ion-icon>
+              <ion-label>History</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+    
+          <ion-menu-toggle>
+            <ion-item lines="none" (click)="onLogout()">
+              <ion-icon name="exit" slot="start"></ion-icon>
+              <ion-label>Logout</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <!-- <app-sidebar></app-sidebar> -->
+  <ion-router-outlet main></ion-router-outlet>
 </ion-app>

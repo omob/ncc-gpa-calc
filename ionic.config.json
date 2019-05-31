@@ -1,5 +1,7 @@
 {
   "name": "ncc",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

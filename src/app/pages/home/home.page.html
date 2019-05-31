@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>HOME</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding-bottom>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm="2" size-lg="6" offset-lg="3">
+        <ion-card id="gradeDisplay">
+          <ion-card-content >
+            <ion-grid>
+              <ion-row>
+                <ion-col >
+                  <ion-card-title>CURRENT GRADE</ion-card-title>
+                  <ion-card-subtitle color="tertiary">2018/2019 / FIRST</ion-card-subtitle>
+                </ion-col>
+                <ion-col size="4" text-right class="date"> 05 JUL 2019</ion-col>
+              </ion-row>
+              <ion-row text-right>
+                <ion-col>
+                  <h1>2.89</h1>
+                  <span>GPA</span>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+        <ion-fab horizontal="end">
+            <ion-fab-button (click)="onCalculateNew()">
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col  size="12" size-sm="8" offset-sm="2" size-lg="6" offset-lg="3">
+        <div id="historyList">
+          <ion-list padding>
+            <history *ngFor="let h of history" [history]="h"></history>
+          </ion-list>
+        </div>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+  
+</ion-content>

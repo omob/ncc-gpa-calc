@@ -1,0 +1,58 @@
+<ion-content padding>
+  
+  <div text-center id="appTitle">
+    <h1>NCC</h1>
+    <p> KEEPING YOUR GRADES IN CHECK</p>
+  </div>
+
+
+  <div id="loginForm" size-sm="10">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-sm="8" offset-sm="2" size-lg="6" offset-lg="3">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">USERNAME</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">PASSWORD</ion-label>
+              <ion-input type="password" ></ion-input>
+            </ion-item>
+            <ion-item lines="none" text-right>
+              <ion-grid>
+                <ion-row>
+                  <ion-col></ion-col>
+                  <ion-col text-right>
+                      <ion-button fill="clear" (click)="onForgotPassword()">forgot password ?</ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col text-center>
+          <ion-button shape="round" (click)="onSignIn()">Sign In</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-grid id="socialMedia">
+    <ion-row text-center>
+      <ion-col size="12">
+         <ion-button fill="clear">
+            <ion-icon name="logo-facebook"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear">
+            <ion-icon slot="icon-only" name="logo-googleplus"></ion-icon>
+          </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-text>Register or <ion-label color="primary">Skip</ion-label></ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

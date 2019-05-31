@@ -1,0 +1,33 @@
+$montserrat:'Montserrat', sans-serif;
+
+#appTitle{
+    margin-top: 60px;
+    font-family: $montserrat;
+
+    h1{
+        font-weight: 800;
+        font-size: 50px;
+        letter-spacing: 8px;
+    }
+
+    p{
+        font-weight: 100;
+        letter-spacing: 2px;
+        font-size: 15px;
+    }
+}
+
+#loginForm{
+    position: relative;
+    top: 10%;
+
+    .ion-button{
+        top: 50px;
+        padding: 5px;
+    }
+}
+#socialMedia{
+    position: relative;
+    top: calc(100vh - 92%);
+}
+

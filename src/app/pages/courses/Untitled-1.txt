@@ -1,0 +1,104 @@
+import { Injectable } from '@angular/core';
+import { ComputedGrade } from '../model/computedGrade.model';
+import { History } from './../model/history.model';
+import { of, Observable, BehaviorSubject, from } from 'rxjs';
+import { tap, map, switchMap } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HistoryService {
+  private _history = new BehaviorSubject<History[]>([]);
+  // private _places = new BehaviorSubject<Place[]>([]);
+  // private _history: ComputedGrade[] = [
+  //   {
+  //     id: "001",
+  //     session: '2018/2019',
+  //     semester: 'first',
+  //     courses: '10',
+  //     date: new Date().toDateString(),
+  //     units: '40',
+  //     grade: '2.89'
+  //   },
+  //   {
+  //     id: "002",
+  //     session: '2018/2019',
+  //     semester: 'second',
+  //     courses: '16',
+  //     date: new Date().toDateString(),
+  //     units: '30',
+  //     grade: '4.56'
+  //   },
+  //   {
+  //     id: "003",
+  //     session: '2019/2020',
+  //     semester: 'first',
+  //     courses: '5',
+  //     date: new Date().toDateString(),
+  //     units: '35',
+  //     grade: '4.78'
+  //   },
+  //   {
+  //     id: "004",
+  //     session: '2019/2020',
+  //     semester: 'second',
+  //     courses: '10',
+  //     date: new Date().toDateString(),
+  //     units: '12',
+  //     grade: '4.98'
+  //   },
+  // ];
+
+  constructor() { }
+
+  get history(): Observable<History[]> {
+    const history = localStorage.getItem('history');
+    console.log(history)
+    if (history == null) {
+      return this._history.asObservable();
+    }
+    return this._history.pipe(
+      tap((history) => {
+        return this._history.next(JSON.parse(history));
+      })
+    );
+  }
+
+  formattedHistory() {
+    // const histories = this.history as History[];
+
+    console.log(this.history);
+    return;
+    return this.history.pipe(
+      switchMap(histories => {
+
+        if (!histories) {
+          return this.history;
+        }
+        else{
+          return of(histories);
+        }
+      }),
+      map(histories => {
+        console.log(histories)
+        const extractedH = [];
+        histories.forEach(history => {
+          history.semesters.forEach( semester => {
+            extractedH.push(
+              {
+                ...semester,
+                session: history.session,
+              }
+            );
+          });
+        });
+        return extractedH;
+      }),
+      tap((histories) => {
+        return histories;
+      })
+    );
+
+    // return of(extractedH);
+  }
+}

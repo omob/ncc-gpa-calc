@@ -1,0 +1,91 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>CALCULATE</ion-title>
+      <ion-buttons slot="primary">
+        <ion-button (click)="onCancel()">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content text-center>
+    <form [formGroup]="form">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-list>
+              <ion-item>
+                <ion-label position="floating"> SESSION </ion-label>
+                <ion-input formControlName="session"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating"> SEMESTER </ion-label>
+                <ion-input formControlName="semester"></ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label>COURSES  <ion-badge color="primary" >{{ courses.length || 0 }}</ion-badge></ion-label>
+               
+                <ion-buttons >
+                  <ion-button fill="clear" (click)="addCourseFields()">
+                      <ion-icon name='add-circle' color="medium"></ion-icon>
+                      <!-- <ion-icon name="{{ addButton ? 'add-circle-outline': 'add-circle'}}"></ion-icon> -->
+                  </ion-button>
+                  <ion-button color="primary" fill="clear" (click)="removeCourseFields()" *ngIf="courses.length > 0">
+                    <ion-icon name='remove-circle-outline'></ion-icon>
+                    <!-- <ion-icon name="{{ removeButton ? 'remove-circle-outline' : 'remove-circle'}}"></ion-icon> -->
+                  </ion-button>
+                </ion-buttons>
+              </ion-item>
+              
+              <div *ngIf="courses.length > 0">
+                <ion-grid formArrayName="courses">
+                  <ion-row *ngFor="let courseGroup of courses.controls; let i = index">
+                    <ion-row [formGroupName]="i">
+                      <ion-col size="6">
+                        <ion-item lines="none">
+                          <ion-label position="floating">COURSE INFO</ion-label>
+                          <ion-input [ngStyle]="{'position': 'relative', 'top': '-4px'}" formControlName="title"></ion-input>
+                        </ion-item>
+                      </ion-col>
+                      <ion-col size="3">
+                          <ion-label>UNITS</ion-label>
+                          <ion-select formControlName="unit">
+                            <ion-select-option *ngFor="let unit of units" [value]="unit"> {{ unit }}</ion-select-option>
+                          </ion-select>
+                      </ion-col>
+                      <ion-col size="3">
+                          <ion-label>GRADES</ion-label>
+                          <ion-select formControlName="grade">
+                            <ion-select-option *ngFor="let g of grades" [value]="g.point"> {{ g.grade | uppercase }}  ({{ g.range}})</ion-select-option>
+                          </ion-select>
+                      </ion-col>
+                    </ion-row>
+                  </ion-row>
+                </ion-grid>
+              </div>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+              <div  text-right padding>
+                <ion-button color="primary" (click)="calculate()" [disabled]="!form.valid || courses.length <= 0">
+                  Calculate
+                </ion-button>
+              </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+
+    <!-- <ion-fab  vertical="center" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="calculate()">
+        <ion-icon name="checkmark"></ion-icon>
+      </ion-fab-button>
+    </ion-fab> -->
+
+  </ion-content>
