@@ -1,4 +1,10 @@
-<ion-item margin-bottom lines="none" detail [routerLink]="['/home/courses/detail', history.id]" routerLinkActive="router-link-active" >
+<ion-item margin-bottom lines="none" 
+  detail 
+  [routerLink]="['/home/courses/detail', history.id]" 
+  [queryParams]="{semester: history.semester}" 
+  routerLinkActive="router-link-active" 
+  #Item
+>
   <ion-grid>
     <ion-row justify-content="center">
       <ion-col>
@@ -29,4 +35,14 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <!-- <ion-item-options>
+    <ion-item-option 
+      (click)="onEdit(history, slidingItem)" color="danger">
+      <ion-icon name="create" slot="icon-only"></ion-icon>
+    </ion-item-option>
+    <ion-item-option 
+      (click)="onDelete(history, slidingItem)" color="danger">
+      <ion-icon name="trash" slot="icon-only"></ion-icon>
+    </ion-item-option> -->
+  <!-- </ion-item-options> -->
 </ion-item>

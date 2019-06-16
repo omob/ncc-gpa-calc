@@ -15,4 +15,11 @@ export class HistoryComponent implements OnInit {
 
   ngOnInit() {}
 
+  onEdit(history, item) {
+
+  }
+
+  onDelete(history, item) {
+
+  }
 }

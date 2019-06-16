@@ -15,10 +15,16 @@ const routes: Routes = [
   },
   { path: 'histories', loadChildren: '../../pages/histories/histories.module#HistoriesPageModule' },
   { path: 'profile', loadChildren: '../../pages/profile/profile.module#ProfilePageModule' },
+
   {
     path: 'courses/detail/:id',
     loadChildren: '../../pages/courses/course-detail/course-detail.module#CourseDetailPageModule'
   },
+  {
+    path: '**',
+    redirectTo: ''
+  }
+
 ];
 
 @NgModule({

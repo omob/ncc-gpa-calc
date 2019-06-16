@@ -7,7 +7,7 @@ export class ComputedGrade {
         public semester: string,
         public date: string,
         public totalUnit: string,
-        public courses: string,
+        public courses: Courses[],
         public cgpa: string
     ) { }
 }

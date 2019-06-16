@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { BehaviorSubject, from } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { BehaviorSubject, from, of } from 'rxjs';
+import { map, tap, switchMap } from 'rxjs/operators';
 import { ComputedGrade } from '../model/computedGrade.model';
 import { FormValue } from './../model/formvalue.model';
 import { History } from './../model/history.model';
@@ -13,6 +13,7 @@ import { History } from './../model/history.model';
 export class HistoryService {
   // private _history: Observable<History[]>;
   private _$histories = new BehaviorSubject<ComputedGrade[]>([]);
+  isInitialized = false;
 
   constructor(private storage: Storage) {}
 
@@ -23,7 +24,8 @@ export class HistoryService {
   initializeHistories() {
     this.getDataFromStorage()
       .subscribe(histories => {
-        this._$histories.next(this.formattedHistory(histories));
+         this._$histories.next(this.formattedHistory(histories));
+         this.isInitialized = true;
       });
   }
 
@@ -119,7 +121,7 @@ export class HistoryService {
     this.storage.set(key, value);
   }
 
-  private formattedHistory(histories): ComputedGrade[] {
+  private formattedHistory(histories: History[]): ComputedGrade[] {
     if (!histories) { return; }
 
     const extractedH = [];
@@ -127,6 +129,7 @@ export class HistoryService {
       history.semesters.forEach( semester => {
         extractedH.push(
           {
+            id: history.id,
             ...semester,
             session: history.session,
           }
@@ -142,5 +145,13 @@ export class HistoryService {
       this.storage.get(data)
         .then( histories => histories)
       );
+  }
+
+  getSemesterDetail(historyId: string, semesterName: string) {
+    return this._$histories.pipe(
+      map(histories => {
+        return histories.find(({ id, semester }) => id === historyId && semester.toLowerCase() === semesterName.toLowerCase());
+      })
+    );
   }
 }

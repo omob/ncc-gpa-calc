@@ -80,9 +80,9 @@ export class AddNewComponent implements OnInit {
           handler: () => {
             formValue.date = new Date();
             this.historyService.saveResult(formValue, true)
-            .subscribe(response => {
-              this.modalCtrl.dismiss({ message: 'saved' }, 'saved');
-            });
+              .subscribe(response => {
+                this.modalCtrl.dismiss({ message: 'saved' }, 'saved');
+              });
           }
         },
         {
@@ -90,8 +90,10 @@ export class AddNewComponent implements OnInit {
           handler: () => {
             // add to history
             formValue.date = new Date();
-            this.historyService.saveResult(formValue, true);
-            this.modalCtrl.dismiss({ message: 'saved' }, 'okay');
+            this.historyService.saveResult(formValue, true)
+              .subscribe(() => {
+                this.modalCtrl.dismiss({ message: 'saved' }, 'okay');
+              });
           }
         }
       ]

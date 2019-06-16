@@ -17,7 +17,7 @@ export class HistoriesPage implements OnInit {
   ngOnInit() {
     this.historyService.initializeHistories();
   }
- 
+
   ionViewWillEnter() {
     this.$histories = this.historyService.histories;
   }
