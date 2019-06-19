@@ -81,12 +81,11 @@ export class SetupService {
 
   get gradeRange(): GradeRange[] {
     // fetch users units
-    const userGradePoint = this._userGradeSetting
-      .find(gradeConfig => gradeConfig.gradeSystem === this.userGradePoint);
+    // const userGradePoint = this._userGradeSetting
+    //   .find(gradeConfig => gradeConfig.gradeSystem === this.userGradePoint);
 
-    if (!userGradePoint) { return; }
-
-    return [ ...userGradePoint.gradeRange ];
+    // if (!userGradePoint) { return; }
+    return [ ...this._userPreferredGradeSetting.gradeRange ];
   }
 
   get units() {
