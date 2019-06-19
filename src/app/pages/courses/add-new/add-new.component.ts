@@ -5,6 +5,7 @@ import { AlertController, ModalController, NavController } from '@ionic/angular'
 import { FormValue } from '../../model/formvalue.model';
 import { HistoryService } from './../../histories/histories.service';
 import { AuthService } from './../../service/auth.service';
+import { SetupService } from './../../service/setup.service';
 
 @Component({
   selector: 'app-add-new',
@@ -22,7 +23,7 @@ export class AddNewComponent implements OnInit {
               private fb: FormBuilder,
               private alertCtrl: AlertController,
               private historyService: HistoryService,
-              private authService: AuthService) { }
+              private setupService: SetupService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -41,11 +42,11 @@ export class AddNewComponent implements OnInit {
   }
 
   get grades() {
-    return this.authService.gradeRange;
+    return this.setupService.gradeRange;
   }
 
   get units() {
-    return this.authService.units;
+    return this.setupService.units;
   }
 
   calculate() {

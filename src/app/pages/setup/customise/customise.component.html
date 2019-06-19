@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Grade System</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onCancel()"> 
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content padding>
+<form [formGroup]="form">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item no-padding>
+          <ion-label>Grade System: </ion-label>
+          <ion-input formControlName="gradeSystem" type="number" placeholder="5 point system"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col no-padding >
+        <ion-item lines="none" no-padding>
+          <ion-label>Grade Range  <ion-badge color="primary" >{{ gradeRange.length || 0 }}</ion-badge></ion-label>
+          <ion-buttons >
+            <ion-button fill="clear" (click)="addGradeRangeField()">
+                <ion-icon name='add-circle' color="medium"></ion-icon>
+            </ion-button>
+            <ion-button color="primary" fill="clear" (click)="removeGradeRangeField()" *ngIf="gradeRange.length > 0">
+              <ion-icon name='remove-circle-outline'></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="gradeRange && gradeRange.length > 0">
+      <div formArrayName="gradeRange">
+        <ion-row *ngFor="let gradeR of gradeRange.controls; let i = index">
+          <ion-row [formGroupName]="i">
+            <ion-col size="4">
+              <ion-item>
+                <ion-label position="floating">RANGE</ion-label>
+                <ion-input formControlName="range" placeholder="70 - 100"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="4">
+              <ion-item>
+                <ion-label position="floating">GRADE</ion-label>
+                <ion-input formControlName="grade" placeholder="A" maxlength="2"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="4">
+              <ion-item>
+                <ion-label position="floating">POINT</ion-label>
+                <ion-input formControlName="point" placeholder="4" type="number"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-row>
+      </div>
+    </ion-row>
+
+    <ion-row>
+      <ion-col text-right>
+        <ion-button 
+          size="small" 
+          color="primary" 
+          (click)="addCustomGradeSystem()" 
+          [disabled]="!form.valid || gradeRange.length <= 0"
+          *ngIf="gradeRange.length > 0"
+        >
+          Save
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>
+</ion-content>
+  

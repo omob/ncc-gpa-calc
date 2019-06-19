@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { UserService } from '../service/user.service';
+import { SetupService } from './../service/setup.service';
 import { UserLoginModel } from './login.model';
-import { Router } from '@angular/router';
-import { AuthService } from './../service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
   constructor(
     private loadingCtrl: LoadingController,
     private userService: UserService,
-    private router: Router, private authService: AuthService) { }
+    private router: Router, private setupService: SetupService) { }
 
   ngOnInit() {
   }
@@ -37,8 +37,8 @@ export class LoginPage implements OnInit {
 
     if (response.success) {
       let url: string;
-      //check if already setup
-      this.authService.isUserSetup ? url = 'home' : url = 'setup';
+
+      await this.setupService.isUserSetup() ? url = 'home' : url = 'setup';
 
       this.router.navigate(['/', url]);
     }

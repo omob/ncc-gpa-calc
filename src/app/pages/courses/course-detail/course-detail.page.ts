@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { HistoryService } from './../../histories/histories.service';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HistoryService } from './../../histories/histories.service';
 import { ComputedGrade } from './../../model/computedGrade.model';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AuthService } from './../../service/auth.service';
+import { SetupService } from './../../service/setup.service';
 
 @Component({
   selector: 'app-course-detail',
@@ -21,7 +22,7 @@ export class CourseDetailPage implements OnInit {
     private historyService: HistoryService,
     private router: Router,
     private fb: FormBuilder,
-    private authService: AuthService,
+    private setupService: SetupService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -63,10 +64,10 @@ export class CourseDetailPage implements OnInit {
   }
 
   get grades() {
-    return this.authService.gradeRange;
+    return this.setupService.gradeRange;
   }
 
   get units() {
-    return this.authService.units;
+    return this.setupService.units;
   }
 }

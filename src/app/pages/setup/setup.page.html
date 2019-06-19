@@ -4,6 +4,109 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding-top>
 
+  <ion-title text-center>
+    <h2>ONE-TIME</h2>
+    <p>SETUP</p>
+  </ion-title>
+
+  <ng-container >
+    <ion-slides pager="true" [options]="slideOpts" align-items-center>
+      <ion-slide>
+        <ion-grid no-padding>
+          <ion-row margin-bottom>
+            <ion-col size="8" offset="2" size-md="6" offset-md="3" ion-margin-bottom>
+             <div class="parentDiv" >
+               <ion-title text-center >
+                  GRADING SYSTEM
+               </ion-title>
+               
+               <ion-list>
+                 <ion-item>
+                   <ion-label>GRADE SYSTEM </ion-label>
+                   <ion-select 
+                    okText="Okay" 
+                    cancelText="Dismiss" 
+                    #selected 
+                    (ionChange)="onSelectGradeSystemChange(selected.value)"
+                   >
+                     <ion-select-option value="" selected>- -</ion-select-option>
+                     
+                     <ion-select-option 
+                      *ngFor="let grade of gradesConfigs" 
+                      [value]="grade"> {{ grade.gradeSystem }} {{ grade.customized ? '(customized)' : ''}}
+                    </ion-select-option>
+                   </ion-select>
+                 </ion-item>
+               </ion-list>
+  
+               <div class= "buttonDiv">
+                 <ion-button size="small" clear fill="clear" (click)="onOpenCustomizeModal()"> Customize? </ion-button>
+               </div>
+             </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+  
+      <ion-slide>
+        <ion-grid no-padding>
+          <ion-row >
+            <ion-col size="8" offset="2" size-md="6" offset-md="3" ion-margin-bottom>
+              <div class="parentDiv">
+                <ion-title text-center >
+                   GRADE SCORE RANGE
+                </ion-title>
+                <div class="content scroll" *ngIf="gradeRange && gradeSystemSelected; noGradeRangeAndGradeSystemSelected">
+                  <div class="flex header">
+                    <p>Range</p>
+                    <p>Grade</p>
+                    <p> Point </p>
+                  </div>
+                  <div class="flex item" *ngFor="let gRange of gradeRange">
+                    <p>{{ gRange.range }}</p>
+                    <p>{{ gRange.grade }} </p>
+                    <p>{{ gRange.point }} </p>
+                  </div>
+                </div>
+                <ng-template #noGradeRangeAndGradeSystemSelected>
+                  <ion-label text-center *ngIf="!gradeRange" padding>
+                    No input available
+                  </ion-label>
+                </ng-template>
+                <div class="buttonDiv">
+                  <ion-button size="small" clear fill="clear"> Customize? </ion-button>
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+      <ion-slide>
+        
+        <ion-grid>
+          <ion-row *ngIf="gradeSystemSelected; else noGradeSystemSelected">
+            <ion-col>
+              <ion-label text-center>
+                Successfully saved your configuration
+              </ion-label>
+            </ion-col>
+            <ion-col size="12">
+              <div>
+                <ion-button (click)="completeSetup()"> NEXT </ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+          
+          <ion-row>
+            <ng-template #noGradeSystemSelected>
+              <p> You have not selected your preferred grade system</p>
+            </ng-template>
+          </ion-row>
+        </ion-grid>
+  
+      </ion-slide>
+    </ion-slides>
+  </ng-container>
 </ion-content>
