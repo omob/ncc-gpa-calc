@@ -7,11 +7,14 @@ import { UserLoginModel } from './../login/login.model';
 })
 export class UserService {
 
+  private _isLogin = false;
+
   constructor() { }
 
   login(userInfo: UserLoginModel): Promise<ServerResponse> {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
+        this._isLogin = true;
         resolve({ success: true, message: 'Logged In'});
       }, 3000);
     });
@@ -19,6 +22,10 @@ export class UserService {
 
   logout() {
 
+  }
+
+  get isLogin () {
+    return this._isLogin;
   }
 }
 

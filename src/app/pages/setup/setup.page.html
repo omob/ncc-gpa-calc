@@ -6,10 +6,16 @@
 
 <ion-content padding-top>
 
-  <ion-title text-center>
-    <h2>ONE-TIME</h2>
-    <p>SETUP</p>
-  </ion-title>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <div class="heading">
+          <h2>ONE-TIME</h2>
+          <p>SETUP</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <ng-container >
     <ion-slides pager="true" [options]="slideOpts" align-items-center>
@@ -18,9 +24,9 @@
           <ion-row margin-bottom>
             <ion-col size="8" offset="2" size-md="6" offset-md="3" ion-margin-bottom>
              <div class="parentDiv" >
-               <ion-title text-center >
-                  GRADING SYSTEM
-               </ion-title>
+               <h4>
+                    GRADING SYSTEM
+               </h4>
                
                <ion-list>
                  <ion-item>
@@ -42,7 +48,14 @@
                </ion-list>
   
                <div class= "buttonDiv">
-                 <ion-button size="small" clear fill="clear" (click)="onOpenCustomizeModal()"> Customize? </ion-button>
+                 <ion-button 
+                    size="small" 
+                    clear 
+                    fill="clear" 
+                    (click)="onOpenCustomizeModal()"
+                  > 
+                    Customize? 
+                  </ion-button>
                </div>
              </div>
             </ion-col>
@@ -55,9 +68,9 @@
           <ion-row >
             <ion-col size="8" offset="2" size-md="6" offset-md="3" ion-margin-bottom>
               <div class="parentDiv">
-                <ion-title text-center >
+                <h4 text-center >
                    GRADE SCORE RANGE
-                </ion-title>
+                </h4>
                 <div class="content scroll" *ngIf="gradeRange && gradeSystemSelected; noGradeRangeAndGradeSystemSelected">
                   <div class="flex header">
                     <p>Range</p>

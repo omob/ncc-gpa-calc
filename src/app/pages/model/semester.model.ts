@@ -8,3 +8,4 @@ export interface Semester {
     date: Date;
     cgpa: string;
 }
+

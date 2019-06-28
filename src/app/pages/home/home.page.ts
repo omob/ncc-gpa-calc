@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ComputedGrade } from '../model/computedGrade.model';
-import { HistoryService } from '../histories/histories.service';
 import { ModalController } from '@ionic/angular';
+import { HistoryService } from '../histories/histories.service';
+import { ComputedGrade } from '../model/computedGrade.model';
 import { AddNewComponent } from './../courses/add-new/add-new.component';
 import { CourseService } from './../courses/course.service';
 

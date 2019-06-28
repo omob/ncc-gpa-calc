@@ -28,7 +28,8 @@ plugins/
 plugins/android.json
 plugins/ios.json
 $RECYCLE.BIN/
-
+public/
+.firebase/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate

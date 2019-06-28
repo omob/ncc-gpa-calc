@@ -10,8 +10,12 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: './pages/home/home.module#HomePageModule',
-    canActivate: [ SetupGuard ]
+    canLoad: [ SetupGuard ]
   },
+  {
+    path: '**',
+    redirectTo: '/home'
+  }
 ];
 
 @NgModule({

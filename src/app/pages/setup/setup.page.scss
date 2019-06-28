@@ -1,9 +1,10 @@
-ion-title {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    font-weight: bold;
-
+.heading {
+    // display: flex;
+    // align-content: center;
+    // align-items: center;
+    // font-weight: bold;
+    text-align: center;
+    
     h2{
         margin-top: 2em;
         font-size: 2.7rem;
@@ -17,6 +18,11 @@ ion-title {
         font-weight: normal;
         letter-spacing: 1px;
     }
+}
+
+h4 {
+    margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .buttonDiv {
