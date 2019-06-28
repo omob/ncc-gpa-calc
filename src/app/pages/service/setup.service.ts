@@ -57,7 +57,6 @@ export class SetupService {
 
   private async getSetupSetting() {
     // fetch from storage
-
     const setupConfig = await this.storage.get('setupConfig');
 
     if (!setupConfig) { return false; }
@@ -67,7 +66,6 @@ export class SetupService {
     this._isUserSetup = isSetup;
     this._userPreferredGradeSetting = preferredSetting;
     this._userGradeSetting = gradeSettings;
-
   }
 
   async isUserSetup() {
@@ -75,28 +73,21 @@ export class SetupService {
     return this._isUserSetup;
   }
 
-  get userGradePoint() {
+  get userGradePointSystem() {
     return this._userPreferredGradeSetting.gradeSystem;
   }
 
   get gradeRange(): GradeRange[] {
-    // fetch users units
-    // const userGradePoint = this._userGradeSetting
-    //   .find(gradeConfig => gradeConfig.gradeSystem === this.userGradePoint);
-
-    // if (!userGradePoint) { return; }
     return [ ...this._userPreferredGradeSetting.gradeRange ];
   }
 
   get units() {
-    let units = +this.userGradePoint;
+    let units = +this.userGradePointSystem;
     const unitsA = [];
-
     while (units > 0) {
       unitsA.push(units);
       units--;
     }
-
     return unitsA;
   }
 
@@ -105,9 +96,7 @@ export class SetupService {
   }
 
   addUserGradeSettings( gradeSetting: GradeSetting): GradeSetting[] {
-    // add user custom config
     this._userGradeSetting.splice(this._userGradeSetting.length, 0, gradeSetting);
-
     return [...this._userGradeSetting];
   }
 
@@ -117,6 +106,12 @@ export class SetupService {
       gradeSettings: this._userGradeSetting,
       preferredSetting
     });
+  }
+
+  gradeEquivalentInAlphabet(gradePoint: number) {
+    if (!gradePoint) { return; }
+    const { grade }  = this.gradeRange.find(({point}) => gradePoint === point);
+    return grade;
   }
 }
 

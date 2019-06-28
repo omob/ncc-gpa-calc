@@ -34,11 +34,9 @@ export class HomePage implements OnInit {
   }
 
   async presentModal() {
-
     const modal = await this.modalCtrl.create({
       component: AddNewComponent
     });
     return await modal.present();
-
   }
 }

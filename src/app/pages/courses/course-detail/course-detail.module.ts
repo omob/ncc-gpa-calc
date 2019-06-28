@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { CourseDetailPage } from './course-detail.page';
+import { EditComponent } from './edit/edit.component';
 
 const routes: Routes = [
   {
@@ -16,12 +17,12 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule,
+  CommonModule,
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [CourseDetailPage]
+  declarations: [CourseDetailPage, EditComponent]
 })
 export class CourseDetailPageModule {}

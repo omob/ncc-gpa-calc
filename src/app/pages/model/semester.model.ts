@@ -3,7 +3,7 @@ import { Course } from './course.model';
 export interface Semester {
     semester: string;
     courses: Course[];
-    totalGrade: number;
+    totalPoint: number;
     totalUnit: number;
     date: Date;
     cgpa: string;

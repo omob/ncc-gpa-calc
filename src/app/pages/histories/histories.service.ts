@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { BehaviorSubject, from, of } from 'rxjs';
-import { map, tap, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, from } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { ComputedGrade } from '../model/computedGrade.model';
-import { FormValue } from './../model/formvalue.model';
+import { FormValue } from './../courses/add-new/add-new.component';
 import { History } from './../model/history.model';
 
 @Injectable({
@@ -38,7 +38,7 @@ export class HistoryService {
         {
           semester: formValue.semester,
           courses: formValue.courses,
-          totalGrade: formValue.totalGrade,
+          totalPoint: formValue.totalPoint,
           totalUnit: formValue.totalUnit,
           date: formValue.date,
           cgpa: formValue.cgpa
@@ -56,24 +56,24 @@ export class HistoryService {
   // this shouldn't be responsible for formatting //fix it
   private saveToLocalStorage(newResult: History) {
     const { session, semesters } = newResult;
-    const { semester, courses, totalGrade, totalUnit, date, cgpa } = semesters[0];
+    const { semester, courses, totalPoint, totalUnit, date, cgpa } = semesters[0];
 
     return this.getDataFromStorage()
       .pipe(
-        map( histories => {
+        map( storedHistory => {
           let localHistories = [];
 
-          if (histories == null) {
+          if (storedHistory == null) {
             localHistories.push(newResult);
-            return this.saveToHistoryStorage_FormatOutput(localHistories);
+            return this.saveToHistoryStorageAndFormatOutput(localHistories);
           }
 
-          localHistories = [...histories];
+          localHistories = [...storedHistory];
           const sessionIndex = localHistories.findIndex(course => course.session === session); // check for existing session
 
           if (sessionIndex === -1) {
             localHistories.push(newResult);
-            return this.saveToHistoryStorage_FormatOutput(localHistories);
+            return this.saveToHistoryStorageAndFormatOutput(localHistories);
           }
 
           const semesterIndex = localHistories[sessionIndex].semesters
@@ -84,26 +84,26 @@ export class HistoryService {
               {
                 semester,
                 courses,
-                totalGrade,
+                totalPoint,
                 totalUnit,
                 date,
                 cgpa
               }
             );
 
-            return this.saveToHistoryStorage_FormatOutput(localHistories);
+            return this.saveToHistoryStorageAndFormatOutput(localHistories);
           }
 
           localHistories[sessionIndex].semesters.splice(semesterIndex, 1, {
             semester,
             courses,
-            totalGrade,
+            totalPoint,
             totalUnit,
             date,
             cgpa
           });
 
-          return this.saveToHistoryStorage_FormatOutput(localHistories);
+          return this.saveToHistoryStorageAndFormatOutput(localHistories);
         }),
         tap(savedHistories => {
           this._$histories.next(savedHistories);
@@ -111,7 +111,7 @@ export class HistoryService {
       );
   }
 
-  private saveToHistoryStorage_FormatOutput(histories): ComputedGrade[] {
+  private saveToHistoryStorageAndFormatOutput(histories): ComputedGrade[] {
     this.saveToHistoryStorage(histories);
     const formattedHistory = this.formattedHistory(histories);
     return formattedHistory;

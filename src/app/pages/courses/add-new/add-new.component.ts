@@ -1,11 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AlertController, ModalController, NavController } from '@ionic/angular';
-import { FormValue } from '../../model/formvalue.model';
+import { AlertController, ModalController } from '@ionic/angular';
 import { HistoryService } from './../../histories/histories.service';
-import { AuthService } from './../../service/auth.service';
+import { Course } from './../../model/course.model';
 import { SetupService } from './../../service/setup.service';
+import { GradeRange } from '../../model/gradeConfig.model';
+
+export interface FormValue {
+  session: string;
+  semester: string;
+  courses: Course[];
+  totalPoint: number;
+  totalUnit: number;
+  cgpa: string;
+  date: Date;
+}
 
 @Component({
   selector: 'app-add-new',
@@ -23,7 +32,7 @@ export class AddNewComponent implements OnInit {
               private fb: FormBuilder,
               private alertCtrl: AlertController,
               private historyService: HistoryService,
-              private setupService: SetupService) { }
+              public setupService: SetupService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -41,7 +50,7 @@ export class AddNewComponent implements OnInit {
     this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  get grades() {
+  get grades(): GradeRange[] {
     return this.setupService.gradeRange;
   }
 
@@ -51,21 +60,20 @@ export class AddNewComponent implements OnInit {
 
   calculate() {
     if (!this.form.valid) { return; }
-
-    const formValue = {... this.form.value } as FormValue;
+    const formValue = { ...this.form.value } as FormValue;
     const courses = formValue.courses;
 
     let totalUnit = 0;
-    let totalGrade = 0;
+    let totalPoint = 0;
 
     courses.forEach(course => {
       totalUnit += course.unit;
-      totalGrade += course.unit * course.grade;
+      totalPoint += course.unit * course.point;
     });
 
-    formValue.totalGrade = totalGrade;
+    formValue.totalPoint = totalPoint;
     formValue.totalUnit = totalUnit;
-    formValue.cgpa = (totalGrade / totalUnit).toFixed(2);
+    formValue.cgpa = (totalPoint / totalUnit).toFixed(2);
 
     this.displayResult(formValue);
   }
@@ -110,7 +118,8 @@ export class AddNewComponent implements OnInit {
       this.fb.group({
         title: ['', Validators.required ],
         unit: ['', Validators.required ],
-        grade: ['', Validators.required ]
+        point: ['', Validators.required ],
+        grade: ['']
       })
     );
   }

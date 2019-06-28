@@ -5,74 +5,70 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <form [formGroup]="form" *ngIf="form">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="6">
+<ion-content no-padding>
+  <ion-grid *ngIf="history">
+    <ion-row>
+      <ion-col size="12"  size-sm="6" offset-sm="3" padding>
+        <div class="flex cgpaDiv">
+          <div>
+            <ion-label>CGPA</ion-label>
+          </div>
+          <div id="gradebox">
+            <p> {{ history.cgpa }} </p>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+  <div class="infoBg"  *ngIf="history">
+    <ion-row>
+      <ion-col class="flex" size="12" size-sm="6" offset-sm="3">
+        <ion-label> SESSION </ion-label>
+        <ion-text> {{ history.session }}</ion-text>
+      </ion-col>
+      <ion-col class="flex" size="12" size-sm="6" offset-sm="3">
+        <ion-label> SEMESTER </ion-label>
+        <ion-text> {{ history.semester }}</ion-text>
+      </ion-col>
+      <ion-col class="flex" size="12" size-sm="6" offset-sm="3">
+        <ion-label> TOTAL UNITS </ion-label>
+        <ion-text> {{ history.totalUnit }}</ion-text>
+      </ion-col>
+      <ion-col class="flex" size="12" size-sm="6" offset-sm="3">
+        <ion-label> TOTAL COURSES </ion-label>
+        <ion-text> {{ history.courses.length }}</ion-text>
+      </ion-col>
+      <ion-col class="flex" size="12" size-sm="6" offset-sm="3">
+        <ion-label> TOTAL POINTS </ion-label>
+        <ion-text> {{ history.totalPoint }}</ion-text>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <ion-grid  *ngIf="history">
+    <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
           <ion-list>
-            <ion-item>
-              <ion-label position="floating"> SESSION </ion-label>
-              <ion-input formControlName="session"></ion-input>
-            </ion-item>
-          </ion-list>
-        </ion-col>
-        <ion-col size="6">
-          <ion-list>
-            <ion-item>
-              <ion-label position="floating"> SEMESTER </ion-label>
-              <ion-input formControlName="semester"></ion-input>
-            </ion-item>
-          </ion-list>
-        </ion-col>
-        
-        <ion-col>
-          <ion-list>
-            <ion-item lines="none">
-              <ion-label>COURSES  <ion-badge color="primary" >{{ courses.length || 0 }}</ion-badge></ion-label>
-            </ion-item>
-            
-            <div *ngIf="courses.length > 0">
-              <ion-grid formArrayName="courses">
-                <ion-row *ngFor="let courseGroup of courses.controls; let i = index">
-                  <ion-row>
-                    <ion-col size="6">
-                      <ion-item lines="none">
-                        <ion-label position="floating">COURSE INFO </ion-label>
-                        <ion-input [ngStyle]="{'position': 'relative', 'top': '-4px'}" [value]="courseGroup.value.title"></ion-input>
-                      </ion-item>
-                    </ion-col>
-                    <ion-col size="3">
-                        <ion-label>UNITS</ion-label>
-                        <ion-select [value]="courseGroup.value.unit">
-                          <ion-select-option *ngFor="let unit of units" [value]="unit"> {{ unit }}</ion-select-option>
-                        </ion-select>
-                    </ion-col>
-                    <ion-col size="3">
-                        <ion-label>GRADES</ion-label>
-                        <ion-select [value]="courseGroup.value.grade">
-                          <ion-select-option *ngFor="let g of grades" [value]="g.point"> {{ g.grade | uppercase }}  ({{ g.range}})</ion-select-option>
-                        </ion-select>
-                    </ion-col>
-                  </ion-row>
+            <div *ngIf="history.courses.length > 0">
+              <div class="flex courseHeader">
+                  <ion-label>COURSE INFO </ion-label>
+                  <ion-label>UNITS</ion-label>
+                  <ion-label>GRADES</ion-label>
+              </div>
+              <ion-grid>
+                <ion-row *ngFor="let course of history.courses; let i = index" class="courses">
+                  <div class="flex courseBody">
+                    <ion-text> {{ course.title }}</ion-text>
+                    <ion-text> {{ course.unit }}</ion-text>
+                    <ion-text> {{ course.grade }} </ion-text>
+                  </div>
                 </ion-row>
               </ion-grid>
             </div>
           </ion-list>
         </ion-col>
-      </ion-row>
-    </ion-grid>
+    </ion-row>
+  </ion-grid>
 
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-            <!-- <div  text-right padding>
-              <ion-button color="primary" (click)="calculate()" [disabled]="!form.valid || courses.length <= 0">
-                Calculate
-              </ion-button>
-            </div> -->
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form>
 </ion-content>

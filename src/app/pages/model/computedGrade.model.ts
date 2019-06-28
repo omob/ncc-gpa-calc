@@ -1,4 +1,5 @@
-import { Courses } from '../home/courses.model';
+
+import { Course } from './course.model';
 
 export class ComputedGrade {
     constructor(
@@ -7,7 +8,8 @@ export class ComputedGrade {
         public semester: string,
         public date: string,
         public totalUnit: string,
-        public courses: Courses[],
+        public totalPoint: string,
+        public courses: Course[],
         public cgpa: string
     ) { }
 }

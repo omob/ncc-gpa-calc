@@ -1,26 +1,24 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { HistoryService } from './../../histories/histories.service';
-import { ComputedGrade } from './../../model/computedGrade.model';
-import { SetupService } from './../../service/setup.service';
-import { History } from './../../model/history.model';
+import { HistoryService } from './../../../histories/histories.service';
+import { ComputedGrade } from './../../../model/computedGrade.model';
+import { SetupService } from './../../../service/setup.service';
 
 @Component({
-  selector: 'app-course-detail',
-  templateUrl: './course-detail.page.html',
-  styleUrls: ['./course-detail.page.scss'],
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.scss'],
 })
-export class CourseDetailPage implements OnInit, OnDestroy {
+
+export class EditComponent implements OnInit {
 
   id: string;
   semester: string;
   form: FormGroup;
   courseDetail: ComputedGrade;
   subscription: Subscription;
-
-  history: ComputedGrade;
 
   constructor(
     private historyService: HistoryService,
@@ -49,14 +47,11 @@ export class CourseDetailPage implements OnInit, OnDestroy {
     this.subscription = this.historyService.getSemesterDetail(this.id, this.semester)
       .subscribe((history) => {
         if (history) {
-          this.history = history;
-
-          console.log(history)
-          // this.form = this.fb.group({
-          //   session: [history.session, Validators.required ],
-          //   semester: [history.semester, Validators.required ],
-          //   courses: this.fb.array(history.courses)
-          // });
+          this.form = this.fb.group({
+            session: [history.session, Validators.required ],
+            semester: [history.semester, Validators.required ],
+            courses: this.fb.array(history.courses)
+          });
         }
       });
   }
@@ -76,4 +71,9 @@ export class CourseDetailPage implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+
+  update() {
+    
+  }
+
 }
