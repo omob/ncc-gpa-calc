@@ -1,12 +1,5 @@
 <ion-app>
-  <ion-menu side="start">
-    <!-- <ion-header>
-        <ion-toolbar>
-          <ion-title>
-            PairBnB
-          </ion-title>
-        </ion-toolbar>
-    </ion-header> -->
+  <ion-menu side="start" [swipeGesture]="false">
     <ion-content id="sidebarContent">
       <div id="banner">
 
@@ -43,5 +36,5 @@
     </ion-content>
   </ion-menu>
   <!-- <app-sidebar></app-sidebar> -->
-  <ion-router-outlet main></ion-router-outlet>
+  <ion-router-outlet main [swipeGesture]="false"></ion-router-outlet>
 </ion-app>

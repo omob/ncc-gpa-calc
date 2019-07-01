@@ -40,7 +40,7 @@ export class LoginPage implements OnInit {
 
       await this.setupService.isUserSetup() ? url = 'home' : url = 'setup';
 
-      this.router.navigate(['/', url]);
+      this.router.navigate(['/', url],);
     }
   }
 }

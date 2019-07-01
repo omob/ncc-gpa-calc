@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { HistoryService } from '../histories/histories.service';
 import { ComputedGrade } from '../model/computedGrade.model';
 import { AddNewComponent } from './../courses/add-new/add-new.component';
@@ -17,7 +17,8 @@ export class HomePage implements OnInit {
   constructor(
     private historyService: HistoryService,
     private courseService: CourseService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private navCtrl: NavController
     ) { }
 
   ngOnInit() {
@@ -28,7 +29,7 @@ export class HomePage implements OnInit {
     this.historyService.histories
     .subscribe(h => this.history = h);
   }
-
+  
   onCalculateNew() {
     this.presentModal();
   }

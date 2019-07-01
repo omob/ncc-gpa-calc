@@ -15,3 +15,10 @@
 .montserrat {
     font-family: 'Montserrat', sans-serif;
 }
+
+ion-toolbar {
+    ion-buttons ion-menu-button, 
+    ion-button {
+        color: #fff;
+    }
+}

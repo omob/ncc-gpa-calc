@@ -24,7 +24,7 @@ export class UserService {
 
   }
 
-  get isLogin () {
+  get isLogin() {
     return this._isLogin;
   }
 }
