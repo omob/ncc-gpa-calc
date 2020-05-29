@@ -11,3 +11,7 @@ password- admin
 
 See demo 
 https://ncc-gpa.firebaseapp.com/
+
+### Login credentials ###
+`username- test` <br>
+`password- test`
